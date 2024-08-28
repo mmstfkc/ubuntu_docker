@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script installs Docker and Docker Compose on Ubuntu 20.04.
+# This script installs Docker on Ubuntu 24.04.
 
 # Step 1: Update system packages
 echo "Updating system packages..."
@@ -36,17 +36,4 @@ sudo docker --version
 echo "Adding current user to the Docker group..."
 sudo usermod -aG docker $USER
 
-# Step 9: Install Docker Compose (latest version)
-echo "Installing Docker Compose..."
-DOCKER_COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
-sudo curl -L "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-# Step 10: Apply executable permissions to the binary
-echo "Applying executable permissions to Docker Compose..."
-sudo chmod +x /usr/local/bin/docker-compose
-
-# Step 11: Verify Docker Compose installation
-echo "Verifying Docker Compose installation..."
-docker-compose --version
-
-echo "Docker and Docker Compose installation completed successfully. Please log out and back in to apply the Docker group changes."
+echo "Docker installation completed successfully. Please log out and back in to apply the Docker group changes."
